@@ -7,8 +7,7 @@ const dbModule = require('../config/db');
 const db = typeof dbModule.promise === 'function' ? dbModule.promise() : dbModule;
 
 // IMPORTANT: must be the SAME secret used in middleware/auth.js
-const JWT_SECRET = process.env.JWT_SECRET || 'CHANGE_ME_same_as_middleware';
-
+const { JWT_SECRET } = require('../config/jwt');
 const router = express.Router();
 
 function makeToken(user) {

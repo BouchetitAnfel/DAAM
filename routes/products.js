@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require('../config/db');
 const { verifyToken, isPharmacist } = require('../middleware/auth');
 
-// GET /api/products (Exercise 02, 03 & 08: List & Search with row limit)
+// GET /api/products
 router.get('/', verifyToken, async (req, res) => {
     const search = req.query.search || '';
-    const limit = 20; // Exercise 08: Search row limit
+    const limit = 20;
 
     try {
         if (search.trim() !== '') {
@@ -28,7 +28,7 @@ router.get('/', verifyToken, async (req, res) => {
     }
 });
 
-// GET /api/products/:id (Exercise 03: Product Details Page)
+// GET /api/products/:id
 router.get('/:id', verifyToken, async (req, res) => {
     try {
         const [rows] = await db.execute(
@@ -44,7 +44,7 @@ router.get('/:id', verifyToken, async (req, res) => {
     }
 });
 
-// POST /api/products (Exercise 02: Pharmacist adds a new product)
+// POST /api/products
 router.post('/', verifyToken, isPharmacist, async (req, res) => {
     const { name, description, price, quantity } = req.body;
 
@@ -69,7 +69,7 @@ router.post('/', verifyToken, isPharmacist, async (req, res) => {
     }
 });
 
-// PUT /api/products/:id (Exercise 02: Pharmacist edits a product)
+// PUT /api/products/:id
 router.put('/:id', verifyToken, isPharmacist, async (req, res) => {
     const { name, description, price, quantity } = req.body;
 
@@ -87,7 +87,7 @@ router.put('/:id', verifyToken, isPharmacist, async (req, res) => {
     }
 });
 
-// DELETE /api/products/:id (Exercise 02: Pharmacist deletes a product)
+// DELETE /api/products/:id
 router.delete('/:id', verifyToken, isPharmacist, async (req, res) => {
     try {
         const [result] = await db.execute('DELETE FROM products WHERE id = ?', [req.params.id]);

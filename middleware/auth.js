@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'pharma_jwt_secret_2026';
-
+const { JWT_SECRET } = require('../config/jwt');
 // Verify token (for any logged-in user)
 function verifyToken(req, res, next) {
     const authHeader = req.headers['authorization'];
